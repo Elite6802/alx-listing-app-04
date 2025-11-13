@@ -1,22 +1,34 @@
-interface PropertyCardProps {
+interface PropertyDetailProps {
   property: {
     id: number;
     title: string;
     location: string;
     price: number;
+    description: string;
     image: string;
+    amenities: string[];
   };
 }
 
-export default function PropertyCard({ property }: PropertyCardProps) {
+export default function PropertyDetail({ property }: PropertyDetailProps) {
   return (
-    <div className="border rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
-      <img src={property.image} alt={property.title} className="w-full h-48 object-cover" />
-      <div className="p-4">
-        <h3 className="text-lg font-semibold">{property.title}</h3>
-        <p className="text-gray-500">{property.location}</p>
-        <p className="text-blue-600 font-bold">${property.price}/night</p>
-      </div>
+    <div className="max-w-4xl mx-auto p-6">
+      <img
+        src={property.image}
+        alt={property.title}
+        className="w-full h-96 object-cover rounded-lg mb-6"
+      />
+      <h1 className="text-3xl font-bold mb-2">{property.title}</h1>
+      <p className="text-gray-600 mb-4">{property.location}</p>
+      <p className="text-xl font-semibold mb-4">${property.price}/night</p>
+      <p className="mb-6">{property.description}</p>
+
+      <h2 className="text-2xl font-semibold mb-2">Amenities</h2>
+      <ul className="list-disc list-inside">
+        {property.amenities.map((amenity, idx) => (
+          <li key={idx}>{amenity}</li>
+        ))}
+      </ul>
     </div>
   );
 }
